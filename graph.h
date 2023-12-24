@@ -1,2 +1,4 @@
-#include <stdio.h>
-int fib(int);
+typedef struct graph{
+    int node;
+    struct Graph *next;
+}graph;
