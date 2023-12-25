@@ -1,4 +1,4 @@
-typedef struct graph{
+typedef struct Graph{
     int node;
     struct Graph *next;
-}graph;
+}Graph;

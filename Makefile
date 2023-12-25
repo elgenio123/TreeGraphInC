@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -g -fopenmp
 
-TARGET = my_program
+TARGET = prog
 
-SRCS = tree.c graph.c others.c main.c
+SRCS = others.c main.c
 
 # Targets and dependencies
 all: $(TARGET)
