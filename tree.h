@@ -23,19 +23,27 @@
     void left_rotation(Node* root, Node* x);
     void right_rotation(Node* root, Node* x);
 
+    //insertion
     void recursive_insert(Node *root,  Node *n);
-
     void insertion_case1(Node *n);
     void insertion_case2(Node *root,Node *n);
     void insertion_case3(Node *root, Node *n);
     void insertion_case4(Node *root, Node *n);
-
     void repair_tree_insert(Node *root,Node *n);
     Node *insertion(Node *root, int val);
 
     int search(Node *root, int key);
-    Node *deleteNode(Node *root, int val);
+
+    //deletion
+    void transplant(Node* root, Node* u, Node* v);
+    Node* find_min(Node* node);
+    Node* successor(Node* root);
+    void delete_fixup(Node* root, Node* x, Node* xParent, int isLeftChild);
+    Node* delete_node_helper(Node* root, int key);
+    void fix_delete(Node* root, Node* x);
+    void delete_node(Node* root, int key);
 
     void displayTree(Node *root);
+    void clear_tree(Node *root);
     
 #endif
