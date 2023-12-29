@@ -9,17 +9,6 @@
     // Function type definition for functions that take an int parameter and return void
     typedef unsigned long long (FunctionPtr)(unsigned long long);
 
-    typedef struct QueueNode {
-        Node* data;
-        struct QueueNode* next;
-    }QueueNode;
-
-    // Structure for a simple queue
-    typedef struct Queue {
-        QueueNode* front;
-        QueueNode* rear;
-    }Queue;
-
     void nonParallelizedLoop(int array[]);
     void parallelizedLoop(int array[]);
 
