@@ -1,4 +1,4 @@
-#include "queue.h"
+#include "../includes/queue.h"
 
 Queue* createQueue() {
     struct Queue* queue = (struct Queue*)malloc(sizeof(struct Queue));

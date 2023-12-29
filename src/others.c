@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "others.h"
+#include "../includes/others.h"
 
 #define SIZE 100000
 

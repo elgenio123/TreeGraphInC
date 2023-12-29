@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "../includes/graph.h"
 
 NodeGraph* createGraphNode(int dest, int weight) {
     NodeGraph* newNode = (NodeGraph*)malloc(sizeof(NodeGraph));

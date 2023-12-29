@@ -3,7 +3,7 @@ CFLAGS = -Wall -g -fopenmp
 
 TARGET = prog
 
-SRCS = tree.c queue.c main.c
+SRCS = src/tree.c src/queue.c main.c
 
 # Targets and dependencies
 all: $(TARGET)

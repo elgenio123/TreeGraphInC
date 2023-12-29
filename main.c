@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "queue.h"
-#include "tree.h"
-#include "graph.h"
-#include "others.h"
+#include "includes/queue.h"
+#include "includes/tree.h"
+#include "includes/graph.h"
+#include "includes/others.h"
 
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
     displayTree(root);
     printf("\n");
 
-    delete_node(root, 12);
+    delete_node(root, 5);
     printf("After deletion\n");
     breadthFirstSearch(root);
     printf("\n");

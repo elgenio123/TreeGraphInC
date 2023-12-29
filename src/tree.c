@@ -1,5 +1,5 @@
-#include "tree.h"
-#include "queue.h"
+#include "../includes/tree.h"
+#include "../includes/queue.h"
 
 Node* parent(Node* n) {
   return n->parent;
@@ -361,5 +361,6 @@ void clear_tree(Node *root){
         clear_tree(root->left);
         clear_tree(root->right);
         free(root);
+        printf("freed\n");
     }
 }
