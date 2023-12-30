@@ -35,13 +35,10 @@
     int search(Node *root, int key);
 
     //deletion
-    void transplant(Node* root, Node* u, Node* v);
+    void transplant(Node** root, Node* u, Node* v);
     Node* find_min(Node* node);
-    Node* successor(Node* root);
-    void delete_fixup(Node* root, Node* x, Node* xParent, int isLeftChild);
+    void delete_fixup(Node* root, Node* x);
     Node* delete_node_helper(Node* root, int key);
-    void fix_delete(Node* root, Node* x);
-    void delete_node(Node* root, int key);
 
     void displayTree(Node *root);
     void clear_tree(Node *root);

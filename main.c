@@ -8,9 +8,9 @@
 int main() {
 
     Node *root = NULL;
-    int a,nodeValue;
-    char quitValue;
-    enum {FALSE, TRUE} quit = TRUE;
+    int a, nodeValue;
+    // char quitValue;
+    // enum {FALSE, TRUE} quit = TRUE;
     for(int i=0; i<=5; i++){
         printf("Enter the key of a node\n");
         scanf("%d", &a);
@@ -20,8 +20,9 @@ int main() {
     printf("\n");
     displayTree(root);
     printf("\n");
-
-    delete_node(root, 5);
+    printf("Enter the node to be deleted\n");
+    scanf("%d", &nodeValue);
+    Node * v = delete_node_helper(root, nodeValue);
     printf("After deletion\n");
     breadthFirstSearch(root);
     printf("\n");
