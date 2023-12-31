@@ -49,5 +49,5 @@
     int find(Subset subsets[], int i);
     void Union(Subset subsets[], int x, int y);
     Edge* getEdges(Graph *graph);
-    void kruskalMST(Edge edges[], int numVertices, int numEdges);
+    void kruskalMST(Graph *graph);
     #endif

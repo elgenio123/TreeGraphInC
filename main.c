@@ -57,37 +57,34 @@ int main() {
     // clear_tree(root);
     //
 
-    // Graph myGraph;
-    // int numVertices = 4;
-    // initGraph(&myGraph, numVertices);
+    Graph myGraph;
+    int numVertices = 6;
+    initGraph(&myGraph, numVertices);
 
-    // addEdge(&myGraph, 0, 1, 2);
-    // addEdge(&myGraph, 0, 3, 1);
-    // addEdge(&myGraph, 1, 2, 4);
-    // addEdge(&myGraph, 1, 4, 3);
-    // addEdge(&myGraph, 2, 3, 5);
-    // addEdge(&myGraph, 2, 4, 0);
-    // addEdge(&myGraph, 3, 4, 6);
-    // addEdge(&myGraph, 3, 5, 2);
-    // addEdge(&myGraph, 4, 5, 0);
+    addEdge(&myGraph, 0, 1, 2);
+    addEdge(&myGraph, 0, 3, 1);
+    addEdge(&myGraph, 1, 2, 4);
+    addEdge(&myGraph, 1, 4, 3);
+    addEdge(&myGraph, 2, 3, 5);
+    addEdge(&myGraph, 2, 4, 0);
+    addEdge(&myGraph, 3, 4, 6);
+    addEdge(&myGraph, 3, 5, 2);
+    addEdge(&myGraph, 4, 5, 0);
 
-    // printGraph(&myGraph);
+     printGraph(&myGraph);
     //dijkstra(&myGraph, 1);
     //dijkstra_parallel(&myGraph, 0);
     //primMST(&myGraph);
 
-    int numVertices = 4;
-    int numEdges = 5;
+    // Edge edges[] = {
+    //     {0, 1, 10},
+    //     {0, 2, 6},
+    //     {0, 3, 5},
+    //     {1, 3, 15},
+    //     {2, 3, 4}
+    // };
 
-    Edge edges[] = {
-        {0, 1, 10},
-        {0, 2, 6},
-        {0, 3, 5},
-        {1, 3, 15},
-        {2, 3, 4}
-    };
-
-    kruskalMST(edges, numVertices, numEdges);
+    kruskalMST(&myGraph);
 
     printf("End...");
     return 0;

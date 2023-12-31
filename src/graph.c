@@ -245,23 +245,47 @@ void Union(Subset subsets[], int x, int y) {
     }       
 }
 
+int getEdgeNumber(Graph *graph){
+    int numEdges = 0;
+    for (int i = 0; i < graph->numVertices; ++i) {
+        for (int j = 0; j < graph->numVertices; ++j) {
+            if (graph->adjacencyMatrix[i][j] != 0) {
+                numEdges++;
+            }
+        }
+    }
+    return numEdges;
+}
+
 Edge* getEdges(Graph *graph){
-    Edge edges[MAX_VERTICES];
-   int k =0,n = graph->numVertices;
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            if(graph->adjacencyMatrix[i][j]!=0){
-               edges[k].src = i;
-               edges[k].dest = j;
-               edges[k].weight = graph->adjacencyMatrix[i][j];}
-        } 
+    int numVertices = graph->numVertices;
+    
+    int numEdges = getEdgeNumber(graph);
+
+    Edge* edges = (Edge*)malloc((numEdges) * sizeof(Edge));
+
+    int edgeIndex = 0;
+    for (int i = 0; i < numVertices; ++i) {
+        for (int j = i + 1; j < numVertices; ++j) {
+            if (graph->adjacencyMatrix[i][j] != 0) {
+                edges[edgeIndex].src = i;
+                edges[edgeIndex].dest = j;
+                edges[edgeIndex].weight = graph->adjacencyMatrix[i][j];
+                edgeIndex++;
+            }
+        }
     }
     return edges;
 }
 
 // Kruskal's Algorithm
-void kruskalMST(Edge edges[], int numVertices, int numEdges) {
+void kruskalMST(Graph *graph) {
 
+    Edge *edges = getEdges(graph);
+    int numVertices = graph->numVertices;
+
+    int numEdges = getEdgeNumber(graph);;
+    
     qsort(edges, numEdges, sizeof(Edge), compareEdges);
 
     Subset subsets[MAX_VERTICES];
