@@ -175,9 +175,15 @@ int main() {
                 break;
             case 6: 
                 unsigned long long n;
+                int intValue;
                 system("cls");
-                printf("Enter the value of n\n");
-                scanf("%llu", &n);
+                while(1){
+                    printf("Enter a positive number \n");
+                    scanf("%d", &intValue);
+                    if(intValue >=0)
+                        break;
+                }
+                n = intValue;
                 executeFunction(fib, fib_dynamic, n);
                 endProgram(quit);
                 break;
