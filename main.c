@@ -29,7 +29,26 @@ int main() {
         scanf("%d", &globalChoice);
         switch(globalChoice){
             case 1: 
-                printf("1 chosen\n");
+                 system("cls");
+                printf("Enter the number of vertices\n");
+                scanf("%d", &numVertices);
+                printf("Enter the source node\n");
+                scanf("%d", &src);
+                initGraph(&myGraph, numVertices);
+                printf("Enter the Adjacent matrix of the graph\n");
+                for(int i = 0; i<numVertices; i++){
+                    for(int j = i; j<numVertices; j++){
+                        if(i!=j){
+                            printf("Enter the weight between %d and %d ", i, j);
+                            scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                        }
+                    }
+                }
+                for(int i = 0; i<numVertices; i++)
+                    for(int j = i; j<numVertices; j++)
+                       (&myGraph)->adjacencyMatrix[j][i] = (&myGraph)->adjacencyMatrix[i][j];
+                system("cls");
+                dijkstra_parallel(&myGraph, src);
                 endProgram(quit);
                 break;
             case 2:

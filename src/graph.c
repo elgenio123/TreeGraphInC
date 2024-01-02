@@ -84,91 +84,61 @@ void dijkstra(Graph *graph, int src) {
 
     printSolution(dist, graph->numVertices);
 }
-int findMinDistance(Vertex cl[], int myStart, int myEnd) {
-    int64_t minDistance = 1000000;  // Change the data type to int64_t
-    int minIndex = -1;
+int findMinDistance(int dist[], int sptSet[], int n) {
+     int min = INT_MAX, min_index;
 
-    for (int i = myStart; i < myEnd; i++) {
-        if (!cl[i].inCluster && cl[i].distance < minDistance) {
-            minDistance = cl[i].distance;
-            minIndex = i;
+    #pragma omp parallel for
+    for (int v = 0; v < n; v++) {
+        if (sptSet[v] == 0 && dist[v] < min) {
+            #pragma omp critical
+            {
+                min = dist[v];
+                min_index = v;
+            }
         }
     }
 
-    return minIndex;
+    return min_index;
 }
 
 // Parallel Dijkstra's algorithm
-void dijkstra_parallel(Graph *graph, int source) {
-    int V = graph->numVertices, P = omp_get_num_procs();
+void dijkstra_parallel(Graph *graph, int src) {
+    int V = graph->numVertices; //P = omp_get_num_procs()
 
-    Vertex cl[V];
-    int localClosest[V/P];
+      int dist[V];     // tTable to store shortest distances from the source
+    int sptSet[V];   // Table to follow the nodes included in the tree of minimum weights
 
-    #pragma omp parallel for
     for (int i = 0; i < V; i++) {
-        cl[i].distance = 1000000 ;  // Change the data type to int64_t
-        cl[i].inCluster = 0;
+        dist[i] = INT_MAX;
+        sptSet[i] = 0;
     }
 
-    #pragma omp parallel for
-    for (int i = 0; i < V / P; i++) {
-        localClosest[i] = 1000000 ;
-    }
+    // DIstance from source to itself is 0
+    dist[src] = 0;
 
-    cl[source].distance = 0;
+    printf("Number of threads %d\n", omp_get_num_procs());
 
-    int allInCluster = 0;
+    // Find the shortest way for every node
+    for (int count = 0; count < V - 1; count++) {
+        int u = findMinDistance(dist, sptSet, V);
 
-    while (!allInCluster) {
+        // Mark chosen node as treated
+        sptSet[u] = 1;
+
+        // Update the distance of the chosen node
         #pragma omp parallel for
-        for (int i = 0; i < P; i++) {
-            int myStart = i * (V / P);
-            int myEnd = (i + 1) * (V / P);
-
-            for (int j = myStart; j < myEnd; j++) {
-                if (!cl[j].inCluster) {
-                    for (int k = 0; k < V; k++) {
-                        if (!cl[k].inCluster && graph->adjacencyMatrix[j][k] > 0) {
-                            int64_t newDistance = cl[j].distance + graph->adjacencyMatrix[j][k];
-                             // Change the data type to int64_t
-                            // #pragma omp atomic
-                            printf("%lld\n", newDistance);
-                            if (newDistance < cl[k].distance) {
-                                cl[k].distance = newDistance;
-                            }
-                        }
-                    }
+        for (int v = 0; v < V; v++) {
+            printf("Thread %d is processing iteration %d\n",omp_get_thread_num(), v);
+            if (!sptSet[v] && graph->adjacencyMatrix[u][v] && dist[u] != INT_MAX && dist[u] + graph->adjacencyMatrix[u][v] < dist[v]) {
+                #pragma omp critical
+                {
+                    printf("Thread %d is updating the table of distances\n", omp_get_thread_num());
+                    dist[v] = dist[u] + graph->adjacencyMatrix[u][v];
                 }
             }
-
-            localClosest[i] = findMinDistance(cl, myStart, myEnd);
         }
-
-        #pragma omp parallel for
-        for (int i = 1; i < P; i++) {
-            if (cl[localClosest[i]].distance < cl[localClosest[0]].distance) {
-                localClosest[0] = localClosest[i];
-            }
-        }
-
-        allInCluster = 1;
-
-        #pragma omp parallel for
-        for (int i = 0; i < V; i++) {
-            if (!cl[i].inCluster) {
-                allInCluster = 0;
-            }
-        }
-
-        cl[localClosest[0]].inCluster = 1;
-        printf("while loop\n");
     }
-
-    printf("Distances from the source to all vertices:\n");
-    for (int i = 0; i < V; i++) {
-        printf("Vertex %d: %lld\n", i, cl[i].distance);  // Change the format specifier to %lld
-    }
+    printSolution(dist, V);
 }
 
 int minKey(int key[], int mstSet[],int n) {

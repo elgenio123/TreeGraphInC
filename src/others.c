@@ -32,8 +32,8 @@ void parallelizedLoop(int array[]) {
     end = clock();
     second = ((double) (end - start)) / CLOCKS_PER_SEC; 
 
-    printf("Fib of %llu is %llu with time:  %f\n",a1,val1, first);
-    printf("Fib_dynamic of %llu is %llu with time:  %f\n",a1,val2, second);
+    printf("Fib of %llu is %llu with execution time:  %f\n",a1,val1, first);
+    printf("Fib_dynamic of %llu is %llu with execution time:  %f\n",a1,val2, second);
 }
 
 unsigned long long fib(unsigned long long n){
