@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "includes/queue.h"
 #include "includes/tree.h"
 #include "includes/graph.h"
@@ -7,85 +8,149 @@
 
 int main() {
 
-    // Node *root = NULL;
-    // int a, nodeValue;
-    // // char quitValue;
-    // // enum {FALSE, TRUE} quit = TRUE;
-    // for(int i=0; i<=5; i++){
-    //     printf("Enter the key of a node\n");
-    //     scanf("%d", &a);
-    //     root = insertion(root, a);
-    // }
-    // breadthFirstSearch(root);
-    // printf("\n");
-    // displayTree(root);
-    // printf("\n");
-    // printf("Enter the node to be deleted\n");
-    // scanf("%d", &nodeValue);
-    // Node * v = delete_node_helper(root, nodeValue);
-    // printf("After deletion\n");
-    // breadthFirstSearch(root);
-    // printf("\n");
-    // displayTree(root);
-    // printf("\n");
-    // // while(quit){
-    // //     breadthFirstSearch(root);
-    // //     printf("\n");
-    // //     displayTree(root);
-    // //     printf("\n");
-    // //     printf("Would you like to quit(y or n or d to delete a node)?\n");
-    // //     scanf("%c", quitValue);
-    // //     switch(quitValue){
-    // //         case 'y':
-    // //             quit = FALSE;
-    // //             break;
-    // //         case 'n':
-    // //             quit = TRUE;
-    // //             break;
-    // //         case 'd':
-    // //             printf("Enter the key of the node\n");
-    // //             scanf("%d", &nodeValue);
-    // //             delete_node(root, nodeValue);
-    // //         default:
-    // //             printf("Choose either 'y' or 'n'\n");
-    // //             scanf("%c", quitValue);
-    // //             break;
-    // //     }
-    // // }
-
-
-    // clear_tree(root);
-    //
-
     Graph myGraph;
-    int numVertices = 6;
-    initGraph(&myGraph, numVertices);
+    int numVertices,src;
 
-    addEdge(&myGraph, 0, 1, 2);
-    addEdge(&myGraph, 0, 3, 1);
-    addEdge(&myGraph, 1, 2, 4);
-    addEdge(&myGraph, 1, 4, 3);
-    addEdge(&myGraph, 2, 3, 5);
-    addEdge(&myGraph, 2, 4, 0);
-    addEdge(&myGraph, 3, 4, 6);
-    addEdge(&myGraph, 3, 5, 2);
-    addEdge(&myGraph, 4, 5, 0);
+    int globalChoice, *quit= malloc(sizeof(int));
+    *quit = 1;
 
-     printGraph(&myGraph);
-    //dijkstra(&myGraph, 1);
-    //dijkstra_parallel(&myGraph, 0);
-    //primMST(&myGraph);
+    while(*quit){
+        system("cls");
+        printf("\n");
+        printf("*************WELCOME TO MY PROJECT ON ALGORITHM*************\n\n");
+        printf("PLEASE CHOOSE WHICH OPERATION YOU WANT TO PERFORM\n\n");
+        printf("1.  Parallelized version of DIjkstra's Algorithm\n\n");
+        printf("2.  Non-Parallelized version of DIjkstra's Algorithm\n\n");
+        printf("3.  Prim's Algorithm\n\n");
+        printf("4.  Kruskall's Algorithm\n\n");
+        printf("5.  Operations in RED-BLACK trees\n\n");
+        printf("6.  Dynamic and sequential Fibonacci series\n\n");
+        printf("Press any other key to quit\n\n");
+        scanf("%d", &globalChoice);
+        switch(globalChoice){
+            case 1: 
+                printf("1 chosen\n");
+                endProgram(quit);
+                break;
+            case 2:
+                system("cls");
+                printf("Enter the number of vertices\n");
+                scanf("%d", &numVertices);
+                printf("Enter the source node\n");
+                scanf("%d", &src);
+                initGraph(&myGraph, numVertices);
+                printf("Enter the Adjacent matrix of the graph\n");
+                for(int i = 0; i<numVertices; i++){
+                    for(int j = 0; j<numVertices; j++){
+                        scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                    }
+                }
+                dijkstra(&myGraph, src);
+                endProgram(quit);
+                break;
+            case 3: 
+                system("cls");
+                printf("Enter the number of vertices\n");
+                scanf("%d", &numVertices);
+                initGraph(&myGraph, numVertices);
+                printf("Enter the Adjacent matrix of the graph\n");
+                for(int i = 0; i<numVertices; i++){
+                    for(int j = 0; j<numVertices; j++){
+                        scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                    }
+                }
+                primMST(&myGraph);
+                endProgram(quit);
+                break;
+            case 4:
+                system("cls");
+                printf("Enter the number of vertices\n");
+                scanf("%d", &numVertices);
+                initGraph(&myGraph, numVertices);
+                printf("Enter the Adjacent matrix of the graph\n");
+                for(int i = 0; i<numVertices; i++){
+                    for(int j = 0; j<numVertices; j++){
+                        scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                    }
+                }
+                kruskalMST(&myGraph);
+                endProgram(quit);
+                break; 
+            case 5: 
+                int numberNodes, a, nodeValue, choice, *leave = malloc(sizeof(int));
+                *leave = 1;
+                Node *root = NULL;
+                system("cls");
+                printf("Enter the number of nodes of the tree\n");
+                scanf("%d", &numberNodes);
+                for(int i=0; i<numberNodes; i++){
+                    printf("Enter the key of a node\n");
+                    scanf("%d", &a);
+                    root = insertion(root, a);
+                }
+                while(*leave){
+                    system("cls");
+                    printf("Choose the operation you wanna perform\n(any other key will exit this menu)\n");
+                    printf("        1. Insert new node \n");
+                    printf("        2. Delete a node \n");
+                    printf("        3. Search a node \n");
+                    printf("        4. Display tree \n");
+                    scanf("%d", &choice);
+                    switch(choice){
+                        case 1:
+                            printf("Enter key of new node\n");
+                            scanf("%d", &nodeValue);
+                            insertion(root, nodeValue);
+                            exitMenuTree(leave);
+                            break;
+                        case 2:
+                            printf("Enter key of node to delete\n");
+                            scanf("%d", &nodeValue);
+                            Node* r = delete_node(root, nodeValue);
+                            free(r);
+                            exitMenuTree(leave);
+                            break;
+                        
+                        case 3:
+                            printf("Enter key of node to search\n");
+                            scanf("%d", &nodeValue);
+                            if(search(root, nodeValue))
+                                printf("Node exists\n");
+                            else  
+                                printf("Node does not exists\n");  
+                            exitMenuTree(leave);
+                            break;
+                        case 4:
+                            printf("Breadth First Search\n");
+                            breadthFirstSearch(root);
+                            printf("\n");
+                            printf("Depth First Search\n");
+                            displayTree(root);
+                            printf("\n");
+                            exitMenuTree(leave);
+                            break;
+                        default:
+                            clear_tree(root);
+                            *leave = 0;
+                    }
+                }
+                endProgram(quit);
+                break;
+            case 6: 
+                unsigned long long n;
+                system("cls");
+                printf("Enter the value of n\n");
+                scanf("%llu", &n);
+                executeFunction(fib, fib_dynamic, n);
+                endProgram(quit);
+                break;
+            default:
+                *quit=0;
+        }
+    }
 
-    // Edge edges[] = {
-    //     {0, 1, 10},
-    //     {0, 2, 6},
-    //     {0, 3, 5},
-    //     {1, 3, 15},
-    //     {2, 3, 4}
-    // };
-
-    kruskalMST(&myGraph);
 
     printf("End...");
+    getchar();
     return 0;
 }

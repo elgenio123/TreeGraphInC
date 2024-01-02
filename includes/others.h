@@ -12,7 +12,10 @@
     void nonParallelizedLoop(int array[]);
     void parallelizedLoop(int array[]);
 
-    void executeFunction(FunctionPtr func1, unsigned long long a1,FunctionPtr func2, unsigned long long a2);
+    void executeFunction(FunctionPtr func1,FunctionPtr func2, unsigned long long);
     unsigned long long fib(unsigned long long n);
     unsigned long long fib_dynamic(unsigned long long n);
+    void endProgram(int*);
+    void exitMenuTree(int *q);
+    void exitMenuRotate(int *q);
 #endif

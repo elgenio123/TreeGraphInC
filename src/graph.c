@@ -221,7 +221,7 @@ void primMST(Graph *graph) {
 // Compare function for qsort
 int compareEdges(const void* a, const void* b) {
     return ((Edge*)a)->weight - ((Edge*)b)->weight;
-}
+}   
 
 // Find operation for Disjoint Set
 int find(Subset subsets[], int i) {

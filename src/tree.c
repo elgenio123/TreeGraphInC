@@ -117,13 +117,13 @@ void recursive_insert(Node *root,  Node *n){
 
 
 void insertion_case1(Node *n) {
-  printf("casee1\n");
+  //printf("casee1\n");
    if (parent(n) == NULL)
       n->color = 1;
 }
 
 void insertion_case2(Node *root, Node *n) {
-   printf("casee2\n");
+   //printf("casee2\n");
    parent(n)->color = 1;
    uncle(n)->color = 1;
    
@@ -136,22 +136,22 @@ void insertion_case3(Node *root, Node *n) {
    
    Node *p = parent(n);
    Node *g = grandparent(n);
-   printf("casee3st\n");
+//    printf("casee3st\n");
    if (g->left !=LEAF && n == g->left->right) {
-      printf("casee3if\n");
+      //printf("casee3if\n");
       left_rotation(root, p);
       n = n->left;
    } else if (g->right !=LEAF && n == g->right->left) {
-      printf("casee3else\n");
+      //printf("casee3else\n");
       right_rotation(root, p);
       n = n->right; 
    }
-  printf("casee3end\n");
+ // printf("casee3end\n");
    insertion_case4(root, n);
 }
 
 void insertion_case4(Node *root, Node *n) {
-   printf("casee4st\n");
+//    printf("casee4st\n");
    Node *p = parent(n);
    Node *g = grandparent(n);
 
@@ -166,25 +166,28 @@ void insertion_case4(Node *root, Node *n) {
 
 
 void repair_tree_insert(Node *root, Node *n) {
-   printf("beginning\n");
+//    printf("beginning\n");
    if (parent(n) == NULL){
       insertion_case1(n);
-      printf("insertcasee1\n");}
+    //   printf("insertcasee1\n");
+    }
    else if (parent(n)->color == 1)
       return;
    else if (uncle(n) != NULL && uncle(n)->color == 0){
       insertion_case2(root, n);
-      printf("insertcasee2\n");}
+    //   printf("insertcasee2\n");
+    }
    else{
       insertion_case3(root, n);
-      printf("insertcasee3\n");}
+    //   printf("insertcasee3\n");
+    }
 }
 
 //Takes a tree and a node n and returns the new root after insertion
 Node *insertion(Node *root, int val) {
 
     Node *n = createNode(val);
-    printf("insert\n");
+    // printf("insert\n");
     recursive_insert(root, n);
     // printf("insertrec\n");
 
@@ -300,15 +303,15 @@ void delete_fixup(Node* root, Node* x) {
 }
 
 
-Node* delete_node_helper(Node* root, int key) {
+Node* delete_node(Node* root, int key) {
     printf("Start delete node helper\n");
     if (root == NULL)
         return root;
 
     if (key < root->key)
-        root->left=delete_node_helper(root->left, key);
+        root->left=delete_node(root->left, key);
     else if (key > root->key)
-         root->right=delete_node_helper(root->right, key);
+         root->right=delete_node(root->right, key);
     else {
         if (root->left == NULL) {
             Node* temp = root->right;
@@ -336,7 +339,7 @@ Node* delete_node_helper(Node* root, int key) {
 
         Node* temp = find_min(root->right);
         root->key = temp->key;
-        root->right = delete_node_helper(root->right, temp->key);
+        root->right = delete_node(root->right, temp->key);
     }
 
     return root;
@@ -355,6 +358,5 @@ void clear_tree(Node *root){
         clear_tree(root->left);
         clear_tree(root->right);
         free(root);
-        printf("freed\n");
     }
 }

@@ -38,7 +38,7 @@
     void transplant(Node** root, Node* u, Node* v);
     Node* find_min(Node* node);
     void delete_fixup(Node* root, Node* x);
-    Node* delete_node_helper(Node* root, int key);
+    Node* delete_node(Node* root, int key);
 
     void displayTree(Node *root);
     void clear_tree(Node *root);
