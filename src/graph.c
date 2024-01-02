@@ -185,9 +185,13 @@ int minKey(int key[], int mstSet[],int n) {
 }
 
 void printMST(int parent[], Graph *graph, int n) {
+    int totalWeight = 0;
     printf("Edge \tWeight\n");
-    for (int i = 1; i < n; i++)
+    for (int i = 1; i < n; i++){
         printf("%d - %d \t%d \n", parent[i], i, graph->adjacencyMatrix[i][parent[i]]);
+        totalWeight += graph->adjacencyMatrix[i][parent[i]];
+    }
+    printf("\nTotal weight = %d \n", totalWeight);
 }
 
 void primMST(Graph *graph) {

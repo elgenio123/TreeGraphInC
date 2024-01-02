@@ -161,7 +161,7 @@ void insertion_case4(Node *root, Node *n) {
       left_rotation(root, g);
    p->color = 1;
    g->color = 0;
-    printf("casee4end\n");
+    //printf("casee4end\n");
 }
 
 
@@ -234,7 +234,7 @@ Node* find_min(Node* node) {
 
 void delete_fixup(Node* root, Node* x) {
     // Fix the tree after deletion
-    printf("Start delete fixUp\n");
+    //printf("Start delete fixUp\n");
     while (x != root && (x == NULL || x->color == BLACK)) {
         if (x == x->parent->left) {
             Node* sibling = x->parent->right;
@@ -299,12 +299,12 @@ void delete_fixup(Node* root, Node* x) {
         x->color = BLACK;
     }
     
-    printf("end delete fixUp\n");
+    //printf("end delete fixUp\n");
 }
 
 
 Node* delete_node(Node* root, int key) {
-    printf("Start delete node helper\n");
+    //printf("Start delete node helper\n");
     if (root == NULL)
         return root;
 
@@ -322,7 +322,7 @@ Node* delete_node(Node* root, int key) {
             }
             else
                 free(root);
-            printf("end delete node helper\n");
+            //printf("end delete node helper\n");
             return temp;
         } else if (root->right == NULL) {
             Node* temp = root->left;
@@ -333,7 +333,7 @@ Node* delete_node(Node* root, int key) {
             }
             else
                 free(root);
-            printf("end delete node helper\n");
+            //printf("end delete node helper\n");
             return temp;
         }
 

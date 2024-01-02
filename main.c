@@ -41,10 +41,16 @@ int main() {
                 initGraph(&myGraph, numVertices);
                 printf("Enter the Adjacent matrix of the graph\n");
                 for(int i = 0; i<numVertices; i++){
-                    for(int j = 0; j<numVertices; j++){
-                        scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                    for(int j = i; j<numVertices; j++){
+                        if(i!=j){
+                            printf("Enter the weight between %d and %d ", i, j);
+                            scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                        }
                     }
                 }
+                for(int i = 0; i<numVertices; i++)
+                    for(int j = i; j<numVertices; j++)
+                       (&myGraph)->adjacencyMatrix[j][i] = (&myGraph)->adjacencyMatrix[i][j];
                 dijkstra(&myGraph, src);
                 endProgram(quit);
                 break;
@@ -55,10 +61,16 @@ int main() {
                 initGraph(&myGraph, numVertices);
                 printf("Enter the Adjacent matrix of the graph\n");
                 for(int i = 0; i<numVertices; i++){
-                    for(int j = 0; j<numVertices; j++){
-                        scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                    for(int j = i; j<numVertices; j++){
+                        if(i!=j){
+                            printf("Enter the weight between %d and %d ", i, j);
+                            scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                        }
                     }
                 }
+                for(int i = 0; i<numVertices; i++)
+                    for(int j = i; j<numVertices; j++)
+                       (&myGraph)->adjacencyMatrix[j][i] = (&myGraph)->adjacencyMatrix[i][j];
                 primMST(&myGraph);
                 endProgram(quit);
                 break;
@@ -69,10 +81,16 @@ int main() {
                 initGraph(&myGraph, numVertices);
                 printf("Enter the Adjacent matrix of the graph\n");
                 for(int i = 0; i<numVertices; i++){
-                    for(int j = 0; j<numVertices; j++){
-                        scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                    for(int j = i; j<numVertices; j++){
+                        if(i!=j){
+                            printf("Enter the weight between %d and %d ", i, j);
+                            scanf("%d", &((&myGraph)->adjacencyMatrix[i][j]));
+                        }
                     }
                 }
+                for(int i = 0; i<numVertices; i++)
+                    for(int j = i; j<numVertices; j++)
+                       (&myGraph)->adjacencyMatrix[j][i] = (&myGraph)->adjacencyMatrix[i][j];
                 kruskalMST(&myGraph);
                 endProgram(quit);
                 break; 
